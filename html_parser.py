@@ -29,24 +29,6 @@ def soup_url(syllabus_url):
     souped = BeautifulSoup(text, "html.parser")
     return souped
 
-# def getLectureInfo(syllabus_path):
-#     with open(syllabus_path, 'r', encoding="utf-8")as file:
-#         text = file.read()
-#         souped = BeautifulSoup(text, "html.parser")
-#         baseInfo = getBaseInfoDict(souped)
-#         teacherInfo = getTeacherInfoDict(souped)
-
-#         # tables[2]:基本情報のテーブル
-#         # tables[3]:担当教員一覧
-#         # tables[4]:詳細情報
-
-#         # for i in normals:
-#         #     content = i.contents
-#         #     for cont in content:
-#         #         print('"{}"'.format(getEssence(cont)))
-#         print(baseInfo)
-#         print(teacherInfo)
-
 
 def getLectureUrlList(depCode, year, pages):
     urls = []
@@ -110,7 +92,3 @@ def getTeacherInfoDict(soupedSyllabus):
         teacherFaculty_ess = getEssence(cells[i*2+1].text)
         teacherInfoDict[teacherName_ess] = teacherFaculty_ess
     return teacherInfoDict
-
-
-testpath = "copied_syllabus/2022/L0122.html"
-# soupe = soup(testpath)

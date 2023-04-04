@@ -80,6 +80,6 @@ connection = mydb.connect(host="localhost",
 
 for dep in FACULTIES.values():
     update_lectures(dep, YEAR, connection)
-# update_lectures("05", YEAR, connection)
+
 
 connection.close()
