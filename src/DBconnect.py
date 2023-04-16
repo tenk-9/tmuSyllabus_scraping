@@ -1,6 +1,5 @@
 import mysql.connector as mydb
 import html_parser
-import os
 import Lecture
 
 FACULTIES = {
@@ -47,7 +46,7 @@ DAY = {"Mon": '1', "Tue": '2', "Wed": '3',
        "Thu": '4', "Fri": '5', "Other": '9'}
 JCODE_PAGES_MAX = 103
 YEAR = 2023
-
+BASEINFO_TABLENAME="syllabus_base_info"
 
 def update_lectures(dep, year, db_connection):
     urlList = html_parser.getLectureUrlList(dep, year, JCODE_PAGES_MAX)
@@ -59,13 +58,13 @@ def update_lectures(dep, year, db_connection):
 def update_lectureInfo(lecture, db_connection):
     id = lecture._id
     cursor = db_connection.cursor()
-    cursor.execute("SELECT * FROM {} WHERE id='{}';".format("base_info", id))
+    cursor.execute("SELECT * FROM {} WHERE id='{}';".format(BASEINFO_TABLENAME, id))
     result = cursor.fetchall()
     if (result == []):
-        cursor.execute(lecture.gen_insertSQL("base_info"))
+        cursor.execute(lecture.gen_insertSQL(BASEINFO_TABLENAME))
         print("INSERTED: {}".format(id))
     else:
-        cursor.execute(lecture.gen_updateSQL("base_info"))
+        cursor.execute(lecture.gen_updateSQL(BASEINFO_TABLENAME))
         print("UPDATED: {}".format(id))
     cursor.close()
 
@@ -74,8 +73,8 @@ def update_lectureInfo(lecture, db_connection):
 
 connection = mydb.connect(host="localhost",
                           user="root",
-                          password="InuiToko1050*",
-                          database="tmuSyllabus_test",
+                          password="PASSWORD",
+                          database="DB_NAME",
                           autocommit=True)
 
 for dep in FACULTIES.values():
