@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import re
-import os
 import requests
 
 COLUMN_JPEN = {"科目種別": "type",
